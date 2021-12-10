@@ -1,5 +1,6 @@
 import { Matrix } from "./Matrix.js"
 import { SceneRender } from "./SceneReader.js"
+import { buildInModel } from "./Model.js"
 
 
 // Global variables
@@ -301,6 +302,32 @@ function start() {
             display();
         }
     });
+
+    // Initial model
+    let data;
+    
+    [model, normals, data] = SceneRender.readFromJson(buildInModel);
+
+    if(model == null) return;
+
+    // Set new parameters for camera, model and material
+    copyArray(position, data.camera.translation);
+    copyArray(angle, data.camera.rotation);
+    copyArray(fov, [data.camera.perspective]);
+
+    copyArray(translation, data.model.translation);
+    copyArray(rotation, data.model.rotation);
+    copyArray(scale, data.model.scale);
+
+    copyArray(material_color, data.material.color);
+    copyArray(material_shine, data.material.shininess);
+    copyArray(lights, data.lights);
+
+    // Inverse camera data
+    inverseArray(position);
+    inverseArray(angle);
+
+    display();
 }
 
 start();
