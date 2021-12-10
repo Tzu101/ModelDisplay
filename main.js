@@ -1,6 +1,6 @@
 import { Matrix } from "./Matrix.js"
 import { SceneRender } from "./SceneReader.js"
-import { buildInModel } from "/Model.js"
+import { buildInModel } from "/model.js"
 
 
 // Global variables
